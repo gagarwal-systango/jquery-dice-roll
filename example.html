@@ -1,0 +1,53 @@
+<script src="jquery.min.js"></script>
+<script src="jquery.dice.js"></script>
+<style>
+	.row {
+		width:9.9em;
+		position: relative;
+		margin-right: auto;
+		margin-left: auto;
+		background-image: url('arch.png');
+		background-repeat: no-repeat;
+		opacity: 1;
+	}
+	.diceRoll {
+		position: relative;
+		display: inline-block;
+		width: 2.4em;
+		height: 5em;
+	}
+</style>
+<div class="row">
+	<div id="dice" class="diceRoll" style="margin-left: 1em;"></div>
+	<div id="dice1" class="diceRoll"></div>
+	<div id="dice2" class="diceRoll" style="margin-right: 1em;"></div>
+</div>
+<script type="text/javascript">
+	var diceValue = {
+		'dice': 6,
+		'dice1': 3,
+		'dice2': 2,
+	}
+	$(function () {
+		$("#dice").dice();
+
+		$("#dice1").dice();
+		$("#dice1").dice("option", { imageUrl: 'red.png' });
+
+		$("#dice2").dice();
+		$("#dice2").dice("option", { imageUrl: 'red.png' });
+
+		$(".row").click(function () {
+			$("#dice").dice("roll", diceValue.dice);
+			$("#dice1").children("div").hide();
+			$("#dice2").children("div").hide();
+
+			setTimeout(function () {
+				$("#dice1").dice("roll", diceValue.dice1);
+				$("#dice2").dice("roll", diceValue.dice2);
+				$("#dice1").children("div").show();
+				$("#dice2").children("div").show();
+			}, 1000);
+		});
+	});
+</script>
